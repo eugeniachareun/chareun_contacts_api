@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/chareun_contacts_api.props" />
+</Project>
