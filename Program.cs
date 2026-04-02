@@ -5,10 +5,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddControllers();
 
 
-// Scoped -> necesitamos una instancia acá y otra en controller
-builder.Services.AddScoped<ContactoService>();
+// Singleton -> necesitamos usar el servicio acá pero también en controller. 
+// Y necesitamos que en ambos lugares se use la misma instancia, para que compartan datos.
+// Si es scoped, los contactos que agregue por el endpoint del controller no estarán disponibles en la lista 
+// del endpoint minimal
+builder.Services.AddSingleton<ContactoService>();
 
 var app = builder.Build();
 
@@ -27,6 +31,8 @@ app.MapGet("/minimal/contactos", (ContactoService service) =>
 })
 .WithName("Minimal-Obtener-Contactos")
 .WithOpenApi();
+
+app.MapControllers();
 
 app.Run();
 

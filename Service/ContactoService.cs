@@ -1,4 +1,4 @@
-class ContactoService
+public class ContactoService
 {
 
     static int nextId = 3;
@@ -26,9 +26,9 @@ class ContactoService
         return contacto;
     }
 
-    public bool Editar(Contacto contacto)
+    public bool Editar(int id, Contacto contacto)
     {
-        var index = Contactos.FindIndex(c => c.Id == contacto.Id);
+        var index = Contactos.FindIndex(c => c.Id == id);
 
         if (index == -1) return false;
 
