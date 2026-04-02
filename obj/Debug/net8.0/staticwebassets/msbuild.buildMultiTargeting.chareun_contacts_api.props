@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../build/chareun_contacts_api.props" />
-</Project>
