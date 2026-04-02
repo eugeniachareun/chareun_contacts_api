@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
+[Authorize(Roles = Roles.ADMIN)]
 [Route("api/contacto")]
 public class ContactosController : ControllerBase
 {
@@ -18,6 +20,7 @@ public class ContactosController : ControllerBase
         return contacto == null ? NotFound() : Ok(contacto);
     }
 
+    
     [HttpPost("add")]
     public ActionResult<Contacto> Crear(Contacto contacto)
     {
@@ -49,7 +52,4 @@ public class ContactosController : ControllerBase
         return Ok(contacto);
 
     }
-
-
-    
 }
