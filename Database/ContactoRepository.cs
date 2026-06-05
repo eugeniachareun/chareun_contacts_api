@@ -1,4 +1,4 @@
-class ContactoRepository : IContactoRepository
+class ContactoRepository : IEntityRepository<Contacto>
 {
     private readonly AgendaContext _db;
     
@@ -40,4 +40,9 @@ class ContactoRepository : IContactoRepository
     public bool Guardar() {
 		return _db.SaveChanges() > 0;
 	}
+
+    public Contacto ObtenerPorString(string str)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -18,7 +18,7 @@ public class TokenProvider(IConfiguration configuration)
             Subject = new ClaimsIdentity([
                 new Claim(ClaimTypes.Sid, usuario.Id.ToString()),
 
-        new Claim(ClaimTypes.NameIdentifier, usuario.Username),
+        new Claim(ClaimTypes.Email, usuario.Email),
         new Claim(ClaimTypes.Role, Roles.ADMIN)
 
     ]),

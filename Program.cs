@@ -64,7 +64,8 @@ builder.Services.AddDbContext<AgendaContext>(options => options
     .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
     .LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name }, LogLevel.Information));
 
-builder.Services.AddScoped<IContactoRepository, ContactoRepository>();
+builder.Services.AddScoped<IEntityRepository<Contacto>, ContactoRepository>();
+builder.Services.AddScoped<IEntityRepository<Usuario>, UsuarioRepository>();
 
 var app = builder.Build();
 

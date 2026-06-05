@@ -1,8 +1,8 @@
 public class ContactoService
 {
-    private readonly IContactoRepository _repo;
+    private readonly IEntityRepository<Contacto> _repo;
 
-    public ContactoService(IContactoRepository repo)
+    public ContactoService(IEntityRepository<Contacto> repo)
     {
         _repo = repo;
     }

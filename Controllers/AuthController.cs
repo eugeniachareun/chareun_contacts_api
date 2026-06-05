@@ -12,16 +12,31 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
-    public ActionResult<string> Login(string usuario, string contrasenia)
+    public ActionResult<string> Login(LoginRequest request)
     {
         try
         {
-            return _authService.login(usuario, contrasenia);
+            return _authService.login(request);
         }
-        catch (System.Exception)
+        catch (System.Exception e)
         {
             
-            return Forbid();
+            return Forbid(e.Message);
+        }
+
+    }
+
+    [HttpPost("register")]
+    public ActionResult<string> Register(Usuario usuario)
+    {
+        try
+        {
+            return _authService.register(usuario);
+        }
+        catch (System.Exception e)
+        {
+            
+            return BadRequest(e.Message);
         }
 
     }

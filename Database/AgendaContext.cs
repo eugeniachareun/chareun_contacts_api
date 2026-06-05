@@ -5,6 +5,8 @@ public class AgendaContext : DbContext
     //Tablas
     public DbSet<Contacto> Contactos { get; set; }
 
+    public DbSet<Usuario> Usuarios { get; set; }
+
     public AgendaContext(DbContextOptions<AgendaContext> options)
         : base(options)
     {
