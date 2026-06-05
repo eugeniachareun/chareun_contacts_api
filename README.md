@@ -4,14 +4,15 @@ Proyecto de API REST para CRUD de contactos.
 
 ## Features
 ### Seguridad
-*  Login con credenciales hardcodeadas
+*  Login y registro de nueva cuenta
+*  Gestión de usuarios en BD
 *  Uso de JWT
 *  Protección de endpoints del controlador
 
 ### CRUD
 * Modelo de contacto:
-  * Datos: Nombre, apellido, teléfono y mail
-* Lista de contactos en memoria
+* Datos: Nombre, apellido, teléfono y mail
+* Lista de contactos en BD
 * Permite editar un contacto
 * Permite agregar un contacto
 
