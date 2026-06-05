@@ -1,47 +1,46 @@
 public class ContactoService
 {
+    private readonly IContactoRepository _repo;
 
-    static int nextId = 3;
-
-    List<Contacto> Contactos { get; }
-
-    public ContactoService()
+    public ContactoService(IContactoRepository repo)
     {
-        Contactos = new List<Contacto>
-        {
-            new Contacto {Id = 1, Nombre = "Juan", Apellido = "Pérez", Email = "juanperez@mail.com", Telefono = "123-456"},
-            new Contacto {Id = 2, Nombre = "Eugenia", Apellido = "Chareun", Email = "eugeniachareun@mail.com", Telefono = "456-123"}
-        };
+        _repo = repo;
     }
 
-    public List<Contacto> ObtenerTodos() => Contactos;
-
-    public Contacto? ObtenerPorId(int id) => Contactos.FirstOrDefault(c => c.Id == id);
-
-    public Contacto Crear(Contacto contacto)
+    public List<Contacto> ObtenerTodos()
     {
-        contacto.Id = nextId++;
-        Contactos.Add(contacto);
+        return _repo.ObtenerTodos();
+    }
+
+    public Contacto? ObtenerPorId(int id)
+    {
+        return _repo.Obtener(id);
+    }
+
+    public Contacto? Crear(Contacto contacto)
+    {
+        var ok = _repo.Agregar(contacto);
+
+        if (!ok)
+            return null;
 
         return contacto;
     }
 
     public bool Editar(int id, Contacto contacto)
     {
-        var index = Contactos.FindIndex(c => c.Id == id);
+        var contactoExistente = _repo.Obtener(id);
 
-        if (index == -1) return false;
+        if (contactoExistente == null)
+            return false;
 
-        Contactos[index] = contacto;
-        return true;
+        contacto.Id = id;
+
+        return _repo.Editar(contacto);
     }
 
     public bool Eliminar(int id)
     {
-        var contacto = Contactos.Find(c => c.Id == id);
-
-        if (contacto is null) return false;
-
-        return Contactos.Remove(contacto);
+        throw new NotImplementedException();
     }
 }

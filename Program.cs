@@ -1,5 +1,6 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,15 +40,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 
-// Singleton -> necesitamos usar el servicio acá pero también en controller. 
-// Y necesitamos que en ambos lugares se use la misma instancia, para que compartan datos.
-// Si es scoped, los contactos que agregue por el endpoint del controller no estarán disponibles en la lista 
-// del endpoint minimal
-builder.Services.AddSingleton<ContactoService>();
-
 // Agrego servicios como scoped, porque al no tener estado NO necesito una única instancia en el sistema
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<TokenProvider>();
+builder.Services.AddScoped<ContactoService>();    
 
 // Agrego autorización y configuración
 builder.Services.AddAuthorization();
@@ -63,6 +59,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ClockSkew = TimeSpan.Zero
         };
     });
+
+builder.Services.AddDbContext<AgendaContext>(options => options
+    .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+    .LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name }, LogLevel.Information));
+
+builder.Services.AddScoped<IContactoRepository, ContactoRepository>();
 
 var app = builder.Build();
 
