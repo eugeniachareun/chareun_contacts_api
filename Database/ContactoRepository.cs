@@ -41,6 +41,14 @@ class ContactoRepository : IEntityRepository<Contacto>
 		return _db.SaveChanges() > 0;
 	}
 
+    public bool Eliminar(int id)
+    {
+        var contacto = Obtener(id);
+        if (contacto == null) return false;
+        _db.Contactos.Remove(contacto);
+        return Guardar();
+    }
+
     public Contacto ObtenerPorString(string str)
     {
         throw new NotImplementedException();

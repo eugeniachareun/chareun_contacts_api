@@ -52,4 +52,12 @@ public class ContactosController : ControllerBase
         return Ok(contacto);
 
     }
+
+    [HttpDelete("delete/{id}")]
+    public ActionResult Eliminar(int id)
+    {
+        bool result = _contactoService.Eliminar(id);
+        if (!result) return NotFound();
+        return Ok();
+    }
 }

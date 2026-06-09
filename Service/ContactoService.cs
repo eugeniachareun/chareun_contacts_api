@@ -41,6 +41,10 @@ public class ContactoService
 
     public bool Eliminar(int id)
     {
-        throw new NotImplementedException();
+        if (_repo is ContactoRepository contactRepo)
+        {
+            return contactRepo.Eliminar(id);
+        }
+        return false;
     }
 }
