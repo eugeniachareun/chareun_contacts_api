@@ -15,6 +15,7 @@ Proyecto de API REST para CRUD de contactos.
 * Lista de contactos en BD
 * Permite editar un contacto
 * Permite agregar un contacto
+* Permite eliminar un contacto
 
 ### Desarrollo
 * Swagger con endpoints documentados, incluye login
